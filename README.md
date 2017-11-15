@@ -14,3 +14,5 @@ The script uses the xmrig mining software right now, that I just downloaded from
 Location of the mining program is ~/git/xmrig/build/xmrig, just as per compile instructions.
 
 Of course the script can be made much nicer, including choosing a miner program and such.
+
+And please forgive me being a newbie with bash/Linux scripts. I am pretty sure there may be a switch statement or something. I just needed to learn the basics first, like how to create a condition, which I figured out a bit now.
