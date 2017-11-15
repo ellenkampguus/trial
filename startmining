@@ -1,0 +1,83 @@
+if [ -z "$1" ]
+then 
+	echo "No pool name given. Setting to hashparty"
+	site="hashparty"
+else 
+	site=$1
+fi
+if [ -z "$2" ]
+then 
+	echo "No number of threads given. Setting to 1"
+	threads=1
+else 
+	threads=$2
+fi
+if [ $site = 'etnhash' ]
+	then par='stratum+tcp://etnhash.com:3333'
+fi
+if [ $site = 'eu' ]
+	then par='stratum+tcp://eupool.electroneum.com:3333'
+fi
+if [ $site = 'io' ]
+#etnpool.io
+	then par='stratum+tcp://etnpool.io:3333'
+fi
+if [ $site = 'iopool' ]
+#etnpool.io
+	then par='stratum+tcp://intense.miningpools.us:3333'
+fi
+if [ $site = 'miners' ]
+	then par='stratum+tcp://etnminers.com:3333'
+fi
+if [ $site = 'miningpool' ]
+	then par='stratum+tcp://pool.electroneum-mining-pool.com:3333'
+fi
+if [ $site = 'mobile' ]
+	then par='stratum+tcp://electroneum.mobile-mining.com:3333'
+fi
+if [ $site = 'netforspeed' ]
+	then par='stratum+tcp://electro.netforspeed.com:3434'
+fi
+if [ $site = 'us' ]
+	then par='stratum+tcp://uspool.electroneum.com:3333'
+fi
+if [ $site = 'asia' ]
+	then par='stratum+tcp://asiapool.electroneum.com:3333'
+fi
+if [ $site = 'hashparty' ]
+	then par='stratum+tcp://electroneum.hashparty.io:3333'
+fi
+if [ $site = 'space' ]
+	then par='stratum+tcp://pool.electroneum.space:3333'
+fi
+if [ $site = 'uax' ]
+	then par='stratum+tcp://etn.uax.io:3333'
+fi
+if [ $site = 'fr' ]
+	then par='stratum+tcp://eu2.electromine.fr:3333'
+fi
+if [ $site = 'charts' ]
+	then par='stratum+tcp://pool.electroneumcharts.com:3333'
+fi
+if [ $site = 'etn' ]
+	then par='stratum+tcp://miner.etnpool.ca:3343'
+fi
+if [ $site = 'supernova' ]
+	then par='stratum+tcp://etn.suprnova.cc:8875'
+fi
+if [ -z "$par" ] 
+	then
+	echo 'Wrong parameter given. Setting pool to hashparty.'
+	par='stratum+tcp://electroneum.hashparty.io:3333'
+fi
+cd ~/git
+cd xmrig
+cd build
+if [ $site = 'supernova' ]
+then
+	echo "./xmrig -a cryptonight -o $par -u guus.etn -p password -t $threads --donate-level=1"
+	./xmrig -a cryptonight -o $par -u guus.etn -p password -t $threads --donate-level=1
+else 
+	echo "./xmrig -a cryptonight -o $par -u etnk67tbdXAB45wCP7c3ukE4fLNpQyQasYiDZNWenzUWEgfjgJxXdjjizpymwzuLfuNBznFocLD5KB7iwLq1YRmJ4BCvbkdwRm -p x -t $threads --donate-level=1"
+	./xmrig -a cryptonight -o $par -u etnk67tbdXAB45wCP7c3ukE4fLNpQyQasYiDZNWenzUWEgfjgJxXdjjizpymwzuLfuNBznFocLD5KB7iwLq1YRmJ4BCvbkdwRm -p x -t $threads --donate-level=1
+fi
