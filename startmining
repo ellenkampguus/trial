@@ -1,3 +1,10 @@
+#version 0.2
+#Copyright Guus Ellenkamp
+#Will apply common Copyright agreement soon
+#For now this script may be used and adapted as-is as long as I, Guus Ellenkamp, am considered as the original author and copyright holder of the basic script.
+port="3333"
+user="etnk67tbdXAB45wCP7c3ukE4fLNpQyQasYiDZNWenzUWEgfjgJxXdjjizpymwzuLfuNBznFocLD5KB7iwLq1YRmJ4BCvbkdwRm"
+password="x"
 if [ -z "$1" ]
 then 
 	echo "No pool name given. Setting to hashparty"
@@ -13,71 +20,88 @@ else
 	threads=$2
 fi
 if [ $site = 'etnhash' ]
-	then par='stratum+tcp://etnhash.com:3333'
+	then par='stratum+tcp://etnhash.com:'
 fi
 if [ $site = 'eu' ]
-	then par='stratum+tcp://eupool.electroneum.com:3333'
+	then par='stratum+tcp://eupool.electroneum.com:'
 fi
 if [ $site = 'io' ]
 #etnpool.io
-	then par='stratum+tcp://etnpool.io:3333'
+	then par='stratum+tcp://etnpool.io:'
 fi
 if [ $site = 'iopool' ]
 #etnpool.io
-	then par='stratum+tcp://intense.miningpools.us:3333'
+	then par='stratum+tcp://intense.miningpools.us:'
+fi
+if [ $site = 'cryptox' ]
+	then par='stratum+tcp://etn.cryptoxpool.com:'
 fi
 if [ $site = 'miners' ]
-	then par='stratum+tcp://etnminers.com:3333'
+	then par='stratum+tcp://etnminers.com:'
 fi
 if [ $site = 'miningpool' ]
-	then par='stratum+tcp://pool.electroneum-mining-pool.com:3333'
+	then par='stratum+tcp://pool.electroneum-mining-pool.com:'
 fi
 if [ $site = 'mobile' ]
-	then par='stratum+tcp://electroneum.mobile-mining.com:3333'
+	then par='stratum+tcp://electroneum.mobile-mining.com:'
 fi
 if [ $site = 'netforspeed' ]
-	then par='stratum+tcp://electro.netforspeed.com:3434'
+	then par='stratum+tcp://electro.netforspeed.com:'
+	port=3434
 fi
 if [ $site = 'us' ]
-	then par='stratum+tcp://uspool.electroneum.com:3333'
+	then par='stratum+tcp://uspool.electroneum.com:'
 fi
 if [ $site = 'asia' ]
-	then par='stratum+tcp://asiapool.electroneum.com:3333'
+	then par='stratum+tcp://asiapool.electroneum.com:'
 fi
 if [ $site = 'hashparty' ]
-	then par='stratum+tcp://electroneum.hashparty.io:3333'
+	then par='stratum+tcp://electroneum.hashparty.io:'
 fi
 if [ $site = 'space' ]
-	then par='stratum+tcp://pool.electroneum.space:3333'
+	then par='stratum+tcp://pool.electroneum.space:'
 fi
 if [ $site = 'uax' ]
-	then par='stratum+tcp://etn.uax.io:3333'
+	then par='stratum+tcp://etn.uax.io:'
 fi
 if [ $site = 'fr' ]
-	then par='stratum+tcp://eu2.electromine.fr:3333'
+	then par='stratum+tcp://eu2.electromine.fr:'
 fi
 if [ $site = 'charts' ]
-	then par='stratum+tcp://pool.electroneumcharts.com:3333'
+	then par='stratum+tcp://pool.electroneumcharts.com:'
 fi
-if [ $site = 'etn' ]
-	then par='stratum+tcp://miner.etnpool.ca:3343'
+if [ $site = 'miner' ]
+	then par='stratum+tcp://miner.etnpool.ca:'
+	port=3343
 fi
 if [ $site = 'supernova' ]
-	then par='stratum+tcp://etn.suprnova.cc:8875'
+	then par='stratum+tcp://etn.suprnova.cc:'
+	user="guus.etn"
+	password="password"
+	port=8875
+fi
+
+if [ $site = 'easyhash' ]
+	then 
+		par='stratum+tcp://etn.easyhash.io:'
+		port=3630	
+fi
+if [ $site = 'xzpool' ]
+	then 
+		par='stratum+tcp://etn.xzpool.com:'
+fi
+if [ $site = 'minekitten' ]
+	then 
+		par='stratum+tcp://etnpool.minekitten.io:'
 fi
 if [ -z "$par" ] 
 	then
 	echo 'Wrong parameter given. Setting pool to hashparty.'
-	par='stratum+tcp://electroneum.hashparty.io:3333'
+	par='stratum+tcp://electroneum.hashparty.io:'
 fi
 cd ~/git
 cd xmrig
 cd build
-if [ $site = 'supernova' ]
-then
-	echo "./xmrig -a cryptonight -o $par -u guus.etn -p password -t $threads --donate-level=1"
-	./xmrig -a cryptonight -o $par -u guus.etn -p password -t $threads --donate-level=1
-else 
-	echo "./xmrig -a cryptonight -o $par -u etnk67tbdXAB45wCP7c3ukE4fLNpQyQasYiDZNWenzUWEgfjgJxXdjjizpymwzuLfuNBznFocLD5KB7iwLq1YRmJ4BCvbkdwRm -p x -t $threads --donate-level=1"
-	./xmrig -a cryptonight -o $par -u etnk67tbdXAB45wCP7c3ukE4fLNpQyQasYiDZNWenzUWEgfjgJxXdjjizpymwzuLfuNBznFocLD5KB7iwLq1YRmJ4BCvbkdwRm -p x -t $threads --donate-level=1
-fi
+parameters="-a cryptonight -o $par$port -u $user -p $password -t $threads --donate-level=1"
+echo "./xmrig$parameters"
+./xmrig $parameters
