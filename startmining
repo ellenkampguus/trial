@@ -2,8 +2,13 @@
 #Copyright Guus Ellenkamp
 #Will apply common Copyright agreement soon
 #For now this script may be used and adapted as-is as long as I, Guus Ellenkamp, am considered as the original author and copyright holder of the basic script.
+# $program holds the link to the executable.
+program=~/git/xmrig/build/xmrig
+# $port holds the port you want to mine to.
 port="3333"
+# $user holds the username for the pool. In case of Electroneum it is mostly the public address.
 user="etnk67tbdXAB45wCP7c3ukE4fLNpQyQasYiDZNWenzUWEgfjgJxXdjjizpymwzuLfuNBznFocLD5KB7iwLq1YRmJ4BCvbkdwRm"
+# $password holds the password. In case of ETN it is normally just 'x'.
 password="x"
 if [ -z "$1" ]
 then 
@@ -18,6 +23,9 @@ then
 	threads=1
 else 
 	threads=$2
+fi
+if [ $site = 'cryptibits' ]
+	then par='stratum+tcp://etn.cryptibits.ltd:'
 fi
 if [ $site = 'cryptox' ]
 	then par='stratum+tcp://etn.cryptoxpool.com:'
@@ -88,7 +96,7 @@ fi
 if [ $site = 'charts' ]
 	then par='stratum+tcp://pool.electroneumcharts.com:'
 fi
-if [ $site = 'miner' ]
+if [ $site = 'poolca' ]
 	then par='stratum+tcp://miner.etnpool.ca:'
 	port=3343
 fi
@@ -119,9 +127,6 @@ if [ -z "$par" ]
 	echo 'Wrong parameter given. Setting pool to hashparty.'
 	par='stratum+tcp://electroneum.hashparty.io:'
 fi
-cd ~/git
-cd xmrig
-cd build
 parameters="-a cryptonight -o $par$port -u $user -p $password -t $threads --donate-level=1"
-echo "./xmrig$parameters"
-./xmrig $parameters
+echo "$program $parameters"
+$program $parameters
