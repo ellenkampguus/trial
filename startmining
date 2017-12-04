@@ -28,6 +28,19 @@ case $site in
 	aicrypto)
 		par='stratum+tcp://etn-pool.ai-crypto.com:'
 	;;
+	baliwae)
+		par='stratum+tcp://pool.etn.baliwae.com:';
+	;;
+	cryptoclub) 
+		par='stratum+tcp://etn.crypto-coins.club:'
+		port=21020
+	;;
+	cryptome)
+		par='stratum+tcp://etn.cryptonight.me:'
+	;;
+	io)
+		par='stratum+tcp://intense.miningpools.us:'
+	;;
 	monero)
 		par='stratum+tcp://vegas-1.xmrpool.net:'
 		port=3333	
@@ -35,6 +48,9 @@ case $site in
 		user=$key
 		password=worker
 	;;
+	ucrypto)
+		par='stratum+tcp://etn.ucrypto.com:'
+	;;		
 	*)
 		if [ $site = 'cryptobits' ]
 			then par='stratum+tcp://etn.mining.cryptobits.ltd:'
@@ -66,10 +82,6 @@ case $site in
 		fi
 		if [ $site = 'eu' ]
 			then par='stratum+tcp://eupool.electroneum.com:'
-		fi
-		if [ $site = 'io' ]
-		#etnpool.io
-			then par='stratum+tcp://etnpool.io:'
 		fi
 		if [ $site = 'iopool' ]
 		#etnpool.io
